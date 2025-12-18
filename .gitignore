@@ -9,3 +9,5 @@ TestResult*/
 .idea/
 .vscode/
 .DS_Store
+.gitignore
+.github/
