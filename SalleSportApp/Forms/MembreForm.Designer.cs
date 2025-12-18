@@ -40,6 +40,9 @@
             this.btnAnnulerReservation = new System.Windows.Forms.Button();
             this.btnRefreshReservations = new System.Windows.Forms.Button();
             this.dgvReservations = new System.Windows.Forms.DataGridView();
+            this.tabHistorique = new System.Windows.Forms.TabPage();
+            this.btnRefreshHistorique = new System.Windows.Forms.Button();
+            this.dgvHistorique = new System.Windows.Forms.DataGridView();
             this.tabProfil = new System.Windows.Forms.TabPage();
             this.lblProfilInfo = new System.Windows.Forms.Label();
             this.tabMembre.SuspendLayout();
@@ -47,6 +50,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCours)).BeginInit();
             this.tabReservations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).BeginInit();
+            this.tabHistorique.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorique)).BeginInit();
             this.tabProfil.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +83,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMembre.Controls.Add(this.tabCours);
             this.tabMembre.Controls.Add(this.tabReservations);
+            this.tabMembre.Controls.Add(this.tabHistorique);
             this.tabMembre.Controls.Add(this.tabProfil);
             this.tabMembre.Location = new System.Drawing.Point(12, 38);
             this.tabMembre.Name = "tabMembre";
@@ -175,6 +181,39 @@
             this.dgvReservations.Size = new System.Drawing.Size(756, 333);
             this.dgvReservations.TabIndex = 0;
             // 
+            // tabHistorique
+            // 
+            this.tabHistorique.Controls.Add(this.btnRefreshHistorique);
+            this.tabHistorique.Controls.Add(this.dgvHistorique);
+            this.tabHistorique.Location = new System.Drawing.Point(4, 22);
+            this.tabHistorique.Name = "tabHistorique";
+            this.tabHistorique.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHistorique.Size = new System.Drawing.Size(768, 374);
+            this.tabHistorique.TabIndex = 2;
+            this.tabHistorique.Text = "Historique";
+            this.tabHistorique.UseVisualStyleBackColor = true;
+            // 
+            // btnRefreshHistorique
+            // 
+            this.btnRefreshHistorique.Location = new System.Drawing.Point(6, 6);
+            this.btnRefreshHistorique.Name = "btnRefreshHistorique";
+            this.btnRefreshHistorique.Size = new System.Drawing.Size(127, 23);
+            this.btnRefreshHistorique.TabIndex = 1;
+            this.btnRefreshHistorique.Text = "Rafraîchir";
+            this.btnRefreshHistorique.UseVisualStyleBackColor = true;
+            this.btnRefreshHistorique.Click += new System.EventHandler(this.btnRefreshHistorique_Click);
+            // 
+            // dgvHistorique
+            // 
+            this.dgvHistorique.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvHistorique.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistorique.Location = new System.Drawing.Point(6, 35);
+            this.dgvHistorique.Name = "dgvHistorique";
+            this.dgvHistorique.Size = new System.Drawing.Size(756, 333);
+            this.dgvHistorique.TabIndex = 0;
+            // 
             // tabProfil
             // 
             this.tabProfil.Controls.Add(this.lblProfilInfo);
@@ -182,7 +221,7 @@
             this.tabProfil.Name = "tabProfil";
             this.tabProfil.Padding = new System.Windows.Forms.Padding(3);
             this.tabProfil.Size = new System.Drawing.Size(768, 374);
-            this.tabProfil.TabIndex = 2;
+            this.tabProfil.TabIndex = 3;
             this.tabProfil.Text = "Profil";
             this.tabProfil.UseVisualStyleBackColor = true;
             // 
@@ -210,6 +249,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCours)).EndInit();
             this.tabReservations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).EndInit();
+            this.tabHistorique.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorique)).EndInit();
             this.tabProfil.ResumeLayout(false);
             this.tabProfil.PerformLayout();
             this.ResumeLayout(false);
@@ -229,6 +270,9 @@
         private System.Windows.Forms.Button btnAnnulerReservation;
         private System.Windows.Forms.Button btnRefreshReservations;
         private System.Windows.Forms.DataGridView dgvReservations;
+        private System.Windows.Forms.TabPage tabHistorique;
+        private System.Windows.Forms.Button btnRefreshHistorique;
+        private System.Windows.Forms.DataGridView dgvHistorique;
         private System.Windows.Forms.TabPage tabProfil;
         private System.Windows.Forms.Label lblProfilInfo;
     }

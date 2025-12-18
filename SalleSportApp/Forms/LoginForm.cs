@@ -55,7 +55,7 @@ namespace SalleSportApp.Forms
             if (membre != null)
             {
                 // Vérifier si l'adhésion est valide
-                if (membre.StatutAdhesion == "Valide")
+                if (string.Equals(membre.StatutAdhesion, "Valide", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Bienvenue, Membre {membre.Prenom} !", "Connexion Réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

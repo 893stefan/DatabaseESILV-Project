@@ -52,6 +52,11 @@ namespace SalleSportApp.Forms
             MessageBox.Show("Prototype : annuler une réservation sélectionnée.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void btnRefreshHistorique_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Prototype : afficher l'historique des inscriptions.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void ShowLoginForm()
         {
             LoginForm loginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
