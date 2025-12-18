@@ -15,8 +15,11 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+
     - name: Restore NuGet packages
-      run: nuget restore
+      run: nuget restore SalleSportApp/SalleSportApp.csproj
 
     - name: Build solution
-      run: msbuild SalleSport.sln /p:Configuration=Release
+      run: msbuild SalleSportApp/SalleSportApp.csproj /p:Configuration=Release
