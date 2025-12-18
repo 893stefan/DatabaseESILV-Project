@@ -50,11 +50,11 @@ namespace SalleSportApp.Data
             {
                 cmd.Parameters.AddWithValue("@Nom", coach.Nom);
                 cmd.Parameters.AddWithValue("@Prenom", coach.Prenom);
-                cmd.Parameters.AddWithValue("@Specialite", (object)(coach.Specialite ?? DBNull.Value));
-                cmd.Parameters.AddWithValue("@Telephone", (object)(coach.Telephone ?? DBNull.Value));
-                cmd.Parameters.AddWithValue("@Email", (object)(coach.Email ?? DBNull.Value));
-                cmd.Parameters.AddWithValue("@Formation", (object)(coach.Formation ?? DBNull.Value));
-                cmd.Parameters.AddWithValue("@Description", (object)(coach.Description ?? DBNull.Value));
+                cmd.Parameters.AddWithValue("@Specialite", (object)coach.Specialite ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Telephone", (object)coach.Telephone ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Email", (object)coach.Email ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Formation", (object)coach.Formation ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Description", (object)coach.Description ?? DBNull.Value);
 
                 conn.Open();
                 return cmd.ExecuteNonQuery() > 0;

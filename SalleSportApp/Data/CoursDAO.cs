@@ -48,9 +48,9 @@ namespace SalleSportApp.Data
             using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Nom", cours.NomCours);
-                cmd.Parameters.AddWithValue("@Description", (object)(cours.Description ?? DBNull.Value));
+                cmd.Parameters.AddWithValue("@Description", (object)cours.Description ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@Duree", cours.Duree);
-                cmd.Parameters.AddWithValue("@Intensite", (object)(cours.Intensite ?? DBNull.Value));
+                cmd.Parameters.AddWithValue("@Intensite", (object)cours.Intensite ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@Niveau", cours.NiveauDifficulte);
                 cmd.Parameters.AddWithValue("@Capacite", cours.CapaciteMax);
 
