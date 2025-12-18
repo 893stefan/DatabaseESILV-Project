@@ -19,7 +19,7 @@ jobs:
       uses: NuGet/setup-nuget@v2
 
     - name: Restore NuGet packages
-      run: nuget restore SalleSportApp/SalleSportApp.csproj
+      run: nuget restore SalleSportApp/SalleSportApp.csproj -PackagesDirectory packages
 
     - name: Build solution
       run: msbuild SalleSportApp/SalleSportApp.csproj /p:Configuration=Release
