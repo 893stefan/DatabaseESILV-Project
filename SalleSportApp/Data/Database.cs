@@ -1,5 +1,6 @@
 ﻿using System;
 using Npgsql;
+using System.Configuration;
 // Pour System.Data.ConnectionState
 using System.Data;
 
@@ -7,9 +8,9 @@ namespace SalleSportApp.Data
 {
     public class Database
     {
-        // Chaîne de connexion PostgreSQL
-        // NOTE : Il est préférable de mettre cette chaîne dans un fichier de configuration (e.g., appsettings.json)
-        private readonly string connString = "Host=localhost;Username=admin_principal;Password=admin123;Database=salle_sport_db";
+        // Chaîne de connexion PostgreSQL (App.config)
+        private readonly string connString = ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString
+            ?? throw new InvalidOperationException("Missing DefaultConnection in App.config.");
 
         /// <summary>
         /// Crée et retourne une nouvelle instance de connexion PostgreSQL (NON ouverte).
