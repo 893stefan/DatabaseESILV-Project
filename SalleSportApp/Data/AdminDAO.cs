@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Data;
 
 namespace SalleSportApp.Data
 {
@@ -92,6 +93,37 @@ namespace SalleSportApp.Data
                 }
             }
             return membres;
+        }
+
+        public List<string> GetRapportResume()
+        {
+            List<string> lignes = new List<string>();
+            using (NpgsqlConnection conn = db.CreateConnection())
+            {
+                conn.Open();
+                lignes.Add($"Membres total : {ExecuteCount(conn, "SELECT COUNT(*) FROM Membre")}");
+                lignes.Add($"Membres en attente : {ExecuteCount(conn, "SELECT COUNT(*) FROM Membre WHERE StatutAdhesion = 'En Attente'")}");
+                lignes.Add($"Coachs total : {ExecuteCount(conn, "SELECT COUNT(*) FROM Coach")}");
+                lignes.Add($"Cours total : {ExecuteCount(conn, "SELECT COUNT(*) FROM Cours")}");
+                lignes.Add($"Sessions total : {ExecuteCount(conn, "SELECT COUNT(*) FROM SessionCours")}");
+                lignes.Add($"Reservations totales : {ExecuteCount(conn, "SELECT COUNT(*) FROM Reservation")}");
+            }
+
+            return lignes;
+        }
+
+        private int ExecuteCount(NpgsqlConnection conn, string query)
+        {
+            using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+            {
+                object result = cmd.ExecuteScalar();
+                if (result == null || result == DBNull.Value)
+                {
+                    return 0;
+                }
+
+                return Convert.ToInt32(result);
+            }
         }
 
         // NOTE : Les méthodes de gestion des Coachs et des Cours iront aussi dans l'AdminDAO (ou dans des DAOs spécifiques comme CoachDAO/CoursDAO, mais pour le squelette, AdminDAO peut tout gérer).

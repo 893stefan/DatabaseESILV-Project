@@ -1,6 +1,7 @@
 ﻿using System;
 using Npgsql;
 using System.Collections.Generic;
+using System.Data;
 using SalleSportApp.Models; // Assurez-vous d'importer vos classes Models
 
 namespace SalleSportApp.Data
@@ -73,6 +74,71 @@ namespace SalleSportApp.Data
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
+            }
+        }
+
+        public DataTable GetSessionsDisponibles()
+        {
+            string query =
+                "SELECT S.SessionID, C.NomCours, S.DateHeureDebut, S.DateHeureFin, S.Statut, " +
+                "C.CapaciteMax, " +
+                "(SELECT COUNT(*) FROM Reservation R WHERE R.SessionID = S.SessionID AND R.StatutReservation = 'Confirmée') AS ReservationsActives, " +
+                "C.CapaciteMax - (SELECT COUNT(*) FROM Reservation R WHERE R.SessionID = S.SessionID AND R.StatutReservation = 'Confirmée') AS PlacesRestantes " +
+                "FROM SessionCours S " +
+                "JOIN Cours C ON S.CoursID = C.CoursID " +
+                "ORDER BY S.DateHeureDebut";
+
+            using (NpgsqlConnection conn = db.CreateConnection())
+            using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd))
+            {
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        public DataTable GetReservationsMembre(int membreID)
+        {
+            string query =
+                "SELECT R.ReservationID, R.DateReservation, R.StatutReservation, " +
+                "S.SessionID, C.NomCours, S.DateHeureDebut " +
+                "FROM Reservation R " +
+                "JOIN SessionCours S ON R.SessionID = S.SessionID " +
+                "JOIN Cours C ON S.CoursID = C.CoursID " +
+                "WHERE R.MembreID = @MembreID AND R.StatutReservation = 'Confirmée' " +
+                "ORDER BY R.DateReservation DESC";
+
+            using (NpgsqlConnection conn = db.CreateConnection())
+            using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd))
+            {
+                cmd.Parameters.AddWithValue("@MembreID", membreID);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        public DataTable GetHistoriqueMembre(int membreID)
+        {
+            string query =
+                "SELECT R.ReservationID, R.DateReservation, R.StatutReservation, " +
+                "S.SessionID, C.NomCours, S.DateHeureDebut " +
+                "FROM Reservation R " +
+                "JOIN SessionCours S ON R.SessionID = S.SessionID " +
+                "JOIN Cours C ON S.CoursID = C.CoursID " +
+                "WHERE R.MembreID = @MembreID " +
+                "ORDER BY R.DateReservation DESC";
+
+            using (NpgsqlConnection conn = db.CreateConnection())
+            using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+            using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd))
+            {
+                cmd.Parameters.AddWithValue("@MembreID", membreID);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return table;
             }
         }
 

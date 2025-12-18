@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AdminDAO.cs" />
+    <Compile Include="Data\CoachDAO.cs" />
+    <Compile Include="Data\CoursDAO.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\MembreDAO.cs" />
     <Compile Include="Data\ReservationDAO.cs" />
