@@ -19,7 +19,21 @@ Mettre en place une base de données et une application permettant de gérer :
 
 ## Guide d'installation
 
-> TODO
+### Prérequis
+- Windows (application WinForms)
+- Visual Studio 2019+ avec support .NET Framework 4.7.2
+- PostgreSQL 13+
+- NuGet (inclus avec Visual Studio)
+
+### Installation
+1. Cloner le dépôt.
+2. Créer la base de données PostgreSQL et exécuter :
+   - `database/schema.sql`
+   - `database/seed.sql` (optionnel)
+3. Mettre à jour la chaîne de connexion dans `SalleSportApp/App.config` (`DefaultConnection`).
+4. Ouvrir `SalleSportApp/SalleSportApp.csproj` dans Visual Studio.
+5. Restaurer les packages NuGet (clic droit sur la solution => Restore NuGet Packages).
+6. Compiler et lancer l'application (F5).
 
 ## Visualisation UML de la gestion de la BDD
 
