@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+TestResult*/
+.idea/
+.vscode/
+.DS_Store
