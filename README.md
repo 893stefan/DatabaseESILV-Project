@@ -1,7 +1,7 @@
 # FitNotFat - Système de gestion de salle de sport
 
 Projet académique visant à concevoir et développer une application de gestion pour une salle de sport.
-Alexander SLEZACK - Stefan STINCA - Rafaël SCHOEN **(voir LICENSE)**
+Alexander SLEZACK - Stefan STINCA - Rafaël SCHOEN _(voir LICENSE)_
 
 ## Description rapide
 Application WinForms (.NET Framework 4.7.2) pour gérer une salle de sport : création de membres, gestion des coachs et des cours, réservations, suivi des demandes et rôles (administrateur vs membre). La base de données PostgreSQL stocke les informations principales (utilisateurs, cours, réservations, etc.).
