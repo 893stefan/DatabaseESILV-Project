@@ -1,0 +1,100 @@
+@startuml
+!define Table(x) class x << (T,#FFAAAA) >>
+hide methods
+hide stereotypes
+
+Table(utilisateur) {
+  + id : serial <<PK>>
+  email : varchar(255) <<UNIQUE, NOT NULL>>
+  mot_de_passe_hash : varchar(255) <<NOT NULL>>
+  role : role_admin_enum <<NOT NULL>>
+  telephone : varchar(20)
+}
+
+Table(membre) {
+  + id : serial <<PK>>
+  nom : varchar(100) <<NOT NULL>>
+  prenom : varchar(100) <<NOT NULL>>
+  adresse : varchar(255)
+  telephone : varchar(20)
+  email : varchar(255)
+  date_inscription : date <<DEFAULT>>
+  statut_inscription : statut_inscription_membre_enum <<DEFAULT en_attente>>
+  date_validation : date
+  valide_par_admin_id : int <<FK>>
+}
+
+Table(coach) {
+  + id : serial <<PK>>
+  nom : varchar(100) <<NOT NULL>>
+  prenom : varchar(100) <<NOT NULL>>
+  specialite : varchar(100)
+  telephone : varchar(20)
+  email : varchar(255)
+  formations : text
+  certifications : text
+  date_embauche : date <<NOT NULL>>
+}
+
+Table(salle) {
+  + id : serial <<PK>>
+  nom : varchar(100) <<NOT NULL>>
+  capacite : int <<NOT NULL, CHECK > 0>>
+  localisation : varchar(255)
+  equipements : text
+}
+
+Table(cours) {
+  + id : serial <<PK>>
+  nom : varchar(100) <<NOT NULL>>
+  description : text
+  duree_min : int <<NOT NULL, CHECK > 0>>
+  intensite : intensite_enum <<NOT NULL>>
+  niveau_difficulte : niveau_difficulte_enum <<NOT NULL>>
+  capacite_max : int <<NOT NULL, CHECK > 0>>
+  horaire : timestamp <<NOT NULL>>
+  coach_id : int <<FK>>
+  salle_id : int <<FK>>
+}
+
+Table(inscription_cours) {
+  + id : serial <<PK>>
+  membre_id : int <<FK>>
+  cours_id : int <<FK>>
+  date_inscription : date <<DEFAULT>>
+  statut : statut_inscription_cours_enum <<DEFAULT reserve>>
+  annule_par_admin_id : int <<FK>>
+  date_annulation : date
+  (membre_id, cours_id) <<UNIQUE>>
+}
+
+Table(paiement_adhesion) {
+  + id : serial <<PK>>
+  membre_id : int <<FK>>
+  montant : decimal(10,2) <<NOT NULL, CHECK > 0>>
+  date_paiement : date <<DEFAULT>>
+  methode : varchar(50) <<NOT NULL>>
+  statut : statut_paiement_enum <<DEFAULT en_attente>>
+}
+
+Table(statistique_rapport) {
+  + id : serial <<PK>>
+  type_rapport : varchar(100) <<NOT NULL>>
+  periode_debut : date <<NOT NULL>>
+  periode_fin : date <<NOT NULL>>
+  genere_par : int <<FK>>
+  date_generation : timestamp <<DEFAULT now>>
+  parametres_json : text
+  url_rapport : varchar(255)
+}
+
+membre::valide_par_admin_id --> utilisateur::id
+cours::coach_id --> coach::id
+cours::salle_id --> salle::id
+inscription_cours::membre_id --> membre::id
+inscription_cours::cours_id --> cours::id
+inscription_cours::annule_par_admin_id --> utilisateur::id
+paiement_adhesion::membre_id --> membre::id
+statistique_rapport::genere_par --> utilisateur::id
+
+@enduml

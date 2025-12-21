@@ -96,6 +96,7 @@
     <Compile Include="Data\CoachDAO.cs" />
     <Compile Include="Data\CoursDAO.cs" />
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\ReportingDAO.cs" />
     <Compile Include="Data\MembreDAO.cs" />
     <Compile Include="Data\ReservationDAO.cs" />
     <Compile Include="Forms\AdminForm.cs">

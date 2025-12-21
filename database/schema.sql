@@ -174,6 +174,27 @@ CREATE TABLE statistique_rapport (
         REFERENCES utilisateur(id)
 );
 
+-- ---------- ROLES / UTILISATEURS BDD ----------
+-- Crée des rôles applicatifs distincts avec des privilèges différents.
+-- ⚠️ Adaptez les mots de passe avant exécution.
+
+-- Administrateur principal : droits complets sur le schéma public.
+CREATE ROLE gym_admin_principal LOGIN PASSWORD 'AdminPrincipal123!';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO gym_admin_principal;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO gym_admin_principal;
+
+-- Administrateur secondaire : CRUD sur les tables, mais pas de droits sur les séquences globales.
+CREATE ROLE gym_admin_secondaire LOGIN PASSWORD 'AdminSecondaire123!';
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO gym_admin_secondaire;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO gym_admin_secondaire;
+
+-- Membre : lecture des référentiels + réservation limitée.
+CREATE ROLE gym_membre LOGIN PASSWORD 'Membre123!';
+GRANT SELECT ON cours, salle, coach TO gym_membre;
+GRANT SELECT ON membre TO gym_membre; -- pour consultation de son compte (à restreindre si besoin)
+GRANT SELECT, INSERT ON inscription_cours TO gym_membre;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO gym_membre;
+
 -- =========================================
 -- Fin du schéma
 -- =========================================

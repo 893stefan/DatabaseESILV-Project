@@ -19,6 +19,7 @@ namespace SalleSportApp.Forms
         private readonly MembreDAO membreDao = new MembreDAO();
         private readonly CoursDAO coursDao = new CoursDAO();
         private readonly CoachDAO coachDao = new CoachDAO();
+        private readonly ReportingDAO reportingDao = new ReportingDAO();
 
         // 2. CONSTRUCTEUR QUI PREND UN ARGUMENT
         public AdminForm(Administrateur admin)
@@ -236,6 +237,12 @@ namespace SalleSportApp.Forms
         {
             lstRapports.Items.Clear();
             foreach (string ligne in adminDao.GetRapportResume())
+            {
+                lstRapports.Items.Add(ligne);
+            }
+
+            lstRapports.Items.Add("--- Requêtes avancées ---");
+            foreach (string ligne in reportingDao.GetRequetesDemo())
             {
                 lstRapports.Items.Add(ligne);
             }
