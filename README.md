@@ -50,12 +50,12 @@ Mettre en place une base de données et une application permettant de gérer :
 - Les requêtes exigées par le cahier des charges sont listées dans `database/queries_recap.sql` (sous-requêtes, ensemble, LEFT/RIGHT JOIN, agrégations).
 
 ## Requêtes SQL (récapitulatif)
-- L’ensemble des requêtes demandées par le cahier des charges est regroupé dans `database/queries_recap.sql`.
-- Le fichier couvre : sous-requêtes, opérations ensemblistes (UNION), jointures (INNER, LEFT, RIGHT) et agrégations (COUNT, SUM, AVG, MIN, MAX, COUNT DISTINCT).
-- Ces requêtes sont également consommées dans l’application via le module de reporting (formulaire Admin).
+- L’ensemble des requêtes demandées par le pdf présentant le projet est regroupé dans `database/queries_recap.sql`.
+- Le fichier couvre : sous-requêtes, opérations ensemblistes (UNION), jointures (LEFT, RIGHT, ..) et agrégations (COUNT, SUM, AVG, MIN, MAX, COUNT DISTINCT).
+- Ces requêtes sont également utilisées dans l’application via le formulaire Admin.
 
 ## Choix techniques
-- Interface : client lourd WinForms (.NET Framework 4.7.2) pour disposer rapidement d’une GUI riche sans passer par une TUI/console.
+- Interface : client GUI WinForms (.NET Framework 4.7.2) pour disposer rapidement d’une interface riche sans passer par une TUI/console.
 - Base de données : PostgreSQL avec enums typés, contraintes `CHECK` sur les capacités/montants et `UNIQUE` sur l’email utilisateur et le couple (membre, cours).
 - Accès données : DAO par entité (`AdminDAO`, `MembreDAO`, `CoursDAO`, `CoachDAO`, `ReservationDAO`) + `ReportingDAO` pour les requêtes du cahier des charges.
 - Sécurité BDD : rôles applicatifs distincts créés dans `database/schema.sql` (`gym_admin_principal`, `gym_admin_secondaire`, `gym_membre`) avec privilèges différenciés.
@@ -67,6 +67,16 @@ Mettre en place une base de données et une application permettant de gérer :
 - `gym_admin_secondaire` : SELECT/INSERT/UPDATE/DELETE sur les tables, USAGE/SELECT sur les séquences.
 - `gym_membre` : lecture des référentiels (cours, salle, coach, membre) et INSERT/SELECT sur `inscription_cours`.
 - Les mots de passe sont définis dans `database/schema.sql` (à adapter avant déploiement).
+
+## Scripts fournis
+- `database/schema.sql` : création des types, tables et rôles BDD.
+- `database/queries_recap.sql` : ensemble des requêtes exigées (sous-requêtes, UNION, LEFT/RIGHT JOIN, agrégations).
+- `images/er_diagram.puml` + `images/UML.png` : diagramme E/A.
+
+## Référentiel cours (données manipulées)
+- Cours : nom, description, durée (minutes), intensité, niveau de difficulté, capacité max, horaire, coach associé, salle associée.
+- Salle : nom, capacité, localisation, équipements.
+- Coach : nom, prénom, spécialité, contact, formations/certifications.
 
 ## Visualisation UML de la gestion de la BDD
 
