@@ -1,4 +1,4 @@
-# FitNotFat - Système de gestion de salle de sport
+Système de gestion de salle de sport
 
 Projet scolaire visant à concevoir et développer une application de gestion pour une salle de sport.
 
